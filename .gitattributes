@@ -1,9 +1,14 @@
-Library/PackageCache/**/*.dylib filter=lfs diff=lfs merge=lfs -text
-Library/PackageCache/**/*.so filter=lfs diff=lfs merge=lfs -text
-Library/PackageCache/**/*.dll filter=lfs diff=lfs merge=lfs -text
-Library/ArtifactDB filter=lfs diff=lfs merge=lfs -text
-**/*.dylib filter=lfs diff=lfs merge=lfs -text
-**/*.dll filter=lfs diff=lfs merge=lfs -text
-**/*.so filter=lfs diff=lfs merge=lfs -text
-**/ArtifactDB filter=lfs diff=lfs merge=lfs -text
-**/libburst-llvm* filter=lfs diff=lfs merge=lfs -text
+# Unity Project Language Attribution
+*.cs linguist-detectable=true
+*.csproj linguist-generated=true
+*.sln linguist-generated=true
+*.shader linguist-language=ShaderLab
+*.compute linguist-language=HLSL
+
+# Exclude certain files from language statistics
+final.app/** linguist-vendored
+*.meta linguist-generated=true
+*.asmdef linguist-generated=true
+
+# Mark C# as the primary language
+*.cs linguist-language=C#
