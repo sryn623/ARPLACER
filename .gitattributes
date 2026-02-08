@@ -1,14 +1,21 @@
-# Unity Project Language Attribution
+# Unity Project - Mark as C# project
 *.cs linguist-detectable=true
+*.cs linguist-language=C#
+
+# Mark generated files
 *.csproj linguist-generated=true
 *.sln linguist-generated=true
+*.meta linguist-generated=true
+
+# Exclude vendor/build files
+final.app/** linguist-vendored=true
+*.app/** linguist-vendored=true
+Packages/** linguist-vendored=true
+
+# Unity shaders
 *.shader linguist-language=ShaderLab
 *.compute linguist-language=HLSL
 
-# Exclude certain files from language statistics
-final.app/** linguist-vendored
-*.meta linguist-generated=true
-*.asmdef linguist-generated=true
-
-# Mark C# as the primary language
-*.cs linguist-language=C#
+# Explicitly mark this as NOT ASP.NET
+*.csproj linguist-language=C#
+*.sln linguist-language=C#
