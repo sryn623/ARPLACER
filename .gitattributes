@@ -2,20 +2,29 @@
 *.cs linguist-detectable=true
 *.cs linguist-language=C#
 
+# Mark Objective-C files correctly (not Wolfram)
+*.m linguist-language=Objective-C
+*.mm linguist-language=Objective-C++
+*.h linguist-language=Objective-C
+
 # Mark generated files
 *.csproj linguist-generated=true
 *.sln linguist-generated=true
 *.meta linguist-generated=true
+*.asmdef linguist-generated=true
 
-# Exclude vendor/build files
+# Exclude vendor/build files from language stats
 final.app/** linguist-vendored=true
 *.app/** linguist-vendored=true
 Packages/** linguist-vendored=true
+Library/** linguist-vendored=true
 
 # Unity shaders
 *.shader linguist-language=ShaderLab
 *.compute linguist-language=HLSL
+*.cginc linguist-language=HLSL
 
-# Explicitly mark this as NOT ASP.NET
-*.csproj linguist-language=C#
-*.sln linguist-language=C#
+# Explicitly NOT Wolfram Language
+*.m linguist-detectable=false linguist-language=Objective-C
+*.wl linguist-vendored=true
+*.nb linguist-vendored=true
