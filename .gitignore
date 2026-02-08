@@ -13,3 +13,11 @@ MemoryCaptures/
 *.suo
 *.user
 .DS_Store
+
+# iOS/macOS Build Outputs
+*.app/
+final.app/
+Build/
+Builds/
+*.ipa
+*.apk
