@@ -21,3 +21,5 @@ Build/
 Builds/
 *.ipa
 *.apk
+final.app/
+*.app/
