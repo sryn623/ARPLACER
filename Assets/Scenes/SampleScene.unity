@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 2034584775}
   - component: {fileID: 2034584774}
   - component: {fileID: 2034584773}
+  - component: {fileID: 2034584780}
   - component: {fileID: 2034584777}
   - component: {fileID: 2034584779}
   - component: {fileID: 2034584778}
@@ -812,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ARPlaceCube
   raycastManager: {fileID: 2034584773}
+  placementPrefab: {fileID: 9059455403739451820, guid: 16a9bb362991745e9aa32dc1d514b419, type: 3}
 --- !u!95 &2034584778
 Animator:
   serializedVersion: 7
@@ -859,6 +861,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2034584780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034584772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8ddda0a1b100b4494d079cd3288817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ARRotateScale
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

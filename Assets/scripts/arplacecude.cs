@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -7,47 +6,45 @@ using UnityEngine.XR.ARSubsystems;
 public class ARPlaceCube : MonoBehaviour
 {
     [SerializeField] private ARRaycastManager raycastManager;
-    bool isPlacing = false;
+    [SerializeField] private GameObject placementPrefab;
 
-    // Update is called once per frame
+    private GameObject placedObject;
+    private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    void Awake()
+    {
+        if (raycastManager == null)
+            raycastManager = FindObjectOfType<ARRaycastManager>();
+    }
+
     void Update()
     {
-        if (!raycastManager) return;
+        if (raycastManager == null) return;
+        if (placedObject != null) return;   // ← blocks multiple placement
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began ||
-            Input.GetMouseButtonDown(0)) && !isPlacing)
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+            TryPlace(Input.mousePosition);
+#else
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            TryPlace(Input.GetTouch(0).position);
+#endif
+    }
+
+    void TryPlace(Vector2 pos)
+    {
+        if (raycastManager.Raycast(pos, hits, TrackableType.PlaneWithinPolygon))
         {
-            isPlacing = true;
-
-            if (Input.touchCount > 0)
-            {
-                PlaceObject(Input.GetTouch(0).position);
-            }
-            else
-            {
-                PlaceObject(Input.mousePosition);
-            }
+            placedObject = Instantiate(
+                placementPrefab,
+                hits[0].pose.position,
+                hits[0].pose.rotation
+            );
         }
     }
 
-    void PlaceObject(Vector2 touchPosition)
+    public GameObject GetPlacedObject()
     {
-        var rayHits = new List<ARRaycastHit>();
-        raycastManager.Raycast(touchPosition, rayHits, TrackableType.AllTypes);
-
-        if (rayHits.Count > 0)
-        {
-            Vector3 hitPosePosition = rayHits[0].pose.position;
-            Quaternion hitPoseRotation = rayHits[0].pose.rotation;
-            Instantiate(raycastManager.raycastPrefab, hitPosePosition, hitPoseRotation);
-        }
-        
-        StartCoroutine(SetIsPlacingToFalseWithDelay());
-    }
-
-    IEnumerator SetIsPlacingToFalseWithDelay()
-    {
-        yield return new WaitForSeconds(0.25f);
-        isPlacing = false;
+        return placedObject;
     }
 }
